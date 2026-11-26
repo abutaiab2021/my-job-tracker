@@ -1,4 +1,4 @@
-// console.log("Job Tracker Connected");
+console.log("Job Tracker Connected");
 
 // ========================================
 // Step 1: Job Data
@@ -122,10 +122,10 @@ const rejectedCount = document.getElementById("rejected-count");
 // ========================================
 
 function renderJobs() {
-  // Clear previous cards
+  // Clear Previous Cards
   jobContainer.innerHTML = "";
 
-  // Filter Jobs according to current tab
+  // Filter Jobs According to Current Tab
   const filterJobs = jobs.filter((job) => {
     return currentTab === "all" || job.status === currentTab;
   });
@@ -135,6 +135,8 @@ function renderJobs() {
   // ======================================
 
   const total = jobs.length;
+
+  const allJobs = jobs.filter((job) => job.status === "all").length;
 
   const interview = jobs.filter((job) => job.status === "interview").length;
 
@@ -148,7 +150,7 @@ function renderJobs() {
   // Tab Count Update
   // ======================================
 
-  allTab.innerText = `All (${total})`;
+  allTab.innerText = `All (${allJobs})`;
 
   interviewTab.innerText = `Interview (${interview})`;
 
@@ -179,8 +181,12 @@ function renderJobs() {
   if (filterJobs.length === 0) {
     jobContainer.innerHTML = `
       <div class="col-span-full text-center py-12">
-        
-        <img src="jobs.png" alt="" class="mx-auto" >
+
+        <img
+          src="jobs.png"
+          alt="No Jobs Available"
+          class="mx-auto w-40"
+        >
 
         <h2 class="text-2xl font-bold mt-4">
           No Jobs Available
@@ -202,8 +208,22 @@ function renderJobs() {
   // ======================================
 
   filterJobs.forEach((job) => {
-    // Find original index from main jobs array
-    const index = jobs.findIndex((item) => item.id === job.id);
+    // Create Status Badge
+    let statusBadge = "";
+
+    if (job.status === "interview") {
+      statusBadge = `
+        <span class="badge badge-success">
+          Interview
+        </span>
+      `;
+    } else if (job.status === "rejected") {
+      statusBadge = `
+        <span class="badge badge-error">
+          Rejected
+        </span>
+      `;
+    }
 
     // Create New Card
     const card = document.createElement("div");
@@ -214,56 +234,75 @@ function renderJobs() {
 
     // Card HTML
     card.innerHTML = `
-      <div class="card-body">
+  <div class="card-body relative">
 
-        <h2 class="card-title">
-          ${job.companyName}
-        </h2>
+    <!-- Delete Button -->
+    <button
+      class="btn btn-ghost btn-circle btn-sm text-error absolute right-4 top-1/2 -translate-y-1/2"
+      data-action="delete"
+      data-id="${job.id}"
+      title="Delete Job">
 
-        <p class="text-lg font-semibold">
-          ${job.position}
-        </p>
+      <i class="fa-solid fa-trash-can text-lg"></i>
 
-        <div class="flex flex-wrap gap-2">
+    </button>
 
-          <span class="badge badge-outline">
-            ${job.location}
-          </span>
+    <!-- Job Information -->
+    <div class="pr-10">
 
-          <span class="badge badge-primary badge-outline">
-            ${job.jobType}
-          </span>
+      <h2 class="card-title">
+        ${job.companyName}
+      </h2>
 
-        </div>
+      <p class="text-lg font-semibold">
+        ${job.position}
+      </p>
 
-        <p class="font-semibold text-success">
-          ${job.salary}
-        </p>
+      <div class="flex flex-wrap gap-2">
+        <span class="badge badge-outline">
+          ${job.location}
+        </span>
 
-        <p class="text-sm text-base-content/70">
-          ${job.description}
-        </p>
+        <span class="badge badge-primary badge-outline">
+          ${job.jobType}
+        </span>
+      </div>
 
-        <div class="card-actions mt-4">
+      <p class="font-semibold text-success">
+        ${job.salary}
+      </p>
 
-          <button
-            class="btn btn-success"
-            data-action="interview"
-            data-id="${job.id}">
-            Interview
-          </button>
+      <!-- Status Badge -->
+      <div class="flex justify-start">
+        ${statusBadge}
+      </div>
 
-          <button
-            class="btn btn-error"
-            data-action="rejected"
-            data-id="${job.id}">
-            Rejected
-          </button>
+      <p class="text-sm text-base-content/70 mt-2">
+        ${job.description}
+      </p>
 
-        </div>
+      <!-- Action Buttons -->
+      <div class="card-actions mt-4">
+
+        <button
+          class="btn btn-success"
+          data-action="interview"
+          data-id="${job.id}">
+          Interview
+        </button>
+
+        <button
+          class="btn btn-error"
+          data-action="rejected"
+          data-id="${job.id}">
+          Rejected
+        </button>
 
       </div>
-    `;
+
+    </div>
+  </div>
+`;
 
     // Insert Card into Job Container
     jobContainer.appendChild(card);
@@ -300,10 +339,9 @@ rejectedTab.addEventListener("click", function () {
 // ========================================
 
 jobContainer.addEventListener("click", function (event) {
-  // Find clicked button
+  // Find Clicked Button
   const button = event.target.closest("button[data-action]");
 
-  // Check button exists
   if (!button) {
     return;
   }
@@ -311,22 +349,35 @@ jobContainer.addEventListener("click", function (event) {
   // Get Job ID
   const jobId = Number(button.dataset.id);
 
-  // Find selected job
-  const selectedJob = jobs.find((job) => job.id === jobId);
+  // Get Button Action
+  const action = button.dataset.action;
 
-  // Check job exists
-  if (!selectedJob) {
+  // Find Selected Job Index
+  const jobIndex = jobs.findIndex((job) => job.id === jobId);
+
+  if (jobIndex === -1) {
     return;
   }
 
-  // Get button action
-  const action = button.dataset.action;
+  // Delete Job
+  if (action === "delete") {
+    jobs.splice(jobIndex, 1);
 
-  // Update Job Status
+    renderJobs();
+
+    return;
+  }
+
+  // Interview / Rejected Status Update
   if (action === "interview" || action === "rejected") {
-    selectedJob.status = action;
+    jobs[jobIndex].status = action;
 
-    // Refresh Dashboard
     renderJobs();
   }
 });
+
+// ========================================
+// Step 7: Initial Display
+// ========================================
+
+renderJobs();
