@@ -91,18 +91,18 @@ const jobs = [
 
 // find the contianer
 const jobContainer = document.getElementById("job-container");
-// get the firt job
-const job = jobs[0];
-console.log(job);
 
-// create new card
-const card = document.createElement("div");
+// get all job by using forEach loop
+jobs.forEach((job) => {
+  // create new card
+  const card = document.createElement("div");
 
-// add daisy UI class name
-card.className = "card bg-base-100 shadow-xl border border-base-300";
+  // add daisy UI class name
+  card.className =
+    "card bg-base-100 shadow-xl border border-base-300 border-primary";
 
-//add card container
-card.innerHTML = `
+  //add card container
+  card.innerHTML = `
         <div class="card-body">
           <h2 class="card-title">${job.companyName}</h2>
           <p class="text-lg font-semibold">${job.position}</p>
@@ -124,6 +124,6 @@ card.innerHTML = `
           </div>
         </div>
 `;
-
-// insert child card into the job container
-jobContainer.appendChild(card);
+  // insert child card into the job container
+  jobContainer.appendChild(card);
+});
