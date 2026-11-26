@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application Tracker</title>
+    <!-- for theme daisy ui -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- for daisy ui -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- for tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+      integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- fav icon -->
+    <link rel="shortcut icon" href="js.png" type="image/x-icon" />
+    <style type="text/tailwindcss">
+      @theme {
+        --color-clifford: #da373d;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="w-10/12 mx-auto pt-5 text-3xl text-secondary font-semibold">
+      <h2>Job Application Tracker</h2>
+    </div>
+    <!-- Status Cards -->
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 w-10/12 mx-auto py-10">
+      <div class="stat bg-base-100 rounded-box shadow border border-secondary">
+        <div class="stat-title text-2xl text-primary font-bold">Total Jobs</div>
+        <div class="stat-value text-primary" id="total-count">8</div>
+      </div>
+
+      <div class="stat bg-base-100 rounded-box shadow border border-secondary">
+        <div class="stat-title text-2xl text-accent font-bold">Interview</div>
+        <div class="stat-value text-success" id="interview-count">0</div>
+      </div>
+
+      <div class="stat bg-base-100 rounded-box shadow border border-secondary">
+        <div class="stat-title text-2xl text-error font-bold">Rejected</div>
+        <div class="stat-value text-error" id="rejected-count">0</div>
+      </div>
+
+    </section>
+
+    <!-- Job List Header -->
+    <section class="flex justify-between items-center mb-5 w-10/12 mx-auto">
+      <h2 class="text-xl font-bold">Available Jobs</h2>
+      <span class="badge badge-primary" id="job-count">8 Jobs</span>
+    </section>
+
+    <!-- Tab buttons -->
+     <section class="flex gap-3 w-10/12 mx-auto mb-5">
+       <button id="all" class="btn btn-primary">All</button>
+       <button id="interview" class="btn btn-accent">Interview</button>
+       <button id="rejected" class="btn btn-error">Rejected</button>
+     </section>
+
+    <!-- Job Cards -->
+    <section id="job-container"
+      class="grid grid-cols-1 gap-5 w-10/12 mx-auto">
+
+      <!-- Job 1 -->
+      <div class="card bg-base-100 shadow-xl border border-primary">
+        <div class="card-body">
+          <h2 class="card-title">Brain Station 23</h2>
+          <p class="text-lg font-semibold">Frontend Developer</p>
+
+          <div class="flex flex-wrap gap-2">
+            <span class="badge badge-outline">Dhaka</span>
+            <span class="badge badge-primary badge-outline">Full-time</span>
+          </div>
+
+          <p class="font-semibold text-success">৳40,000 - ৳60,000</p>
+
+          <p class="text-sm text-base-content/70">
+            Develop modern web applications using HTML, CSS, JavaScript and React.
+          </p>
+
+          <div class="card-actions mt-4">
+            <button class="btn max-w-[80px] btn-success btn-outline flex-1 interview-btn">
+              Interview
+            </button>
+            <button class="btn max-w-[80px] btn-error btn-outline flex-1 rejected-btn">
+              Rejected
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job 2 -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">BJIT Limited</h2>
+          <p class="text-lg font-semibold">Junior React Developer</p>
+
+          <div class="flex flex-wrap gap-2">
+            <span class="badge badge-outline">Dhaka</span>
+            <span class="badge badge-primary badge-outline">Full-time</span>
+          </div>
+
+          <p class="font-semibold text-success">৳35,000 - ৳50,000</p>
+
+          <p class="text-sm text-base-content/70">
+            Build responsive frontend applications with React and JavaScript.
+          </p>
+
+          <div class="card-actions mt-4">
+            <button class="btn max-w-[80px] btn-success btn-outline flex-1 interview-btn">Interview</button>
+            <button class="btn max-w-[80px] btn-error btn-outline flex-1 rejected-btn">Rejected</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job 3 -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">DataSoft Systems</h2>
+          <p class="text-lg font-semibold">Software Engineer</p>
+
+          <div class="flex flex-wrap gap-2">
+            <span class="badge badge-outline">Dhaka</span>
+            <span class="badge badge-primary badge-outline">Full-time</span>
+          </div>
+
+          <p class="font-semibold text-success">৳40,000 - ৳60,000</p>
+
+          <p class="text-sm text-base-content/70">
+            Work on enterprise software and database-driven applications.
+          </p>
+
+          <div class="card-actions mt-4">
+            <button class="btn max-w-[80px] btn-success btn-outline flex-1 interview-btn">Interview</button>
+            <button class="btn max-w-[80px] btn-error btn-outline flex-1 rejected-btn">Rejected</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job 4 -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">TigerIT Bangladesh</h2>
+          <p class="text-lg font-semibold">Backend Developer</p>
+
+          <div class="flex flex-wrap gap-2">
+            <span class="badge badge-outline">Dhaka</span>
+            <span class="badge badge-primary badge-outline">Remote</span>
+          </div>
+
+          <p class="font-semibold text-success">৳50,000 - ৳70,000</p>
+
+          <p class="text-sm text-base-content/70">
+            Develop backend services, APIs and database integrations.
+          </p>
+
+          <div class="card-actions mt-4">
+            <button class="btn max-w-[80px] btn-success btn-outline flex-1 interview-btn">Interview</button>
+            <button class="btn max-w-[80px] btn-error btn-outline flex-1 rejected-btn">Rejected</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job 5 -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">REVE Systems</h2>
+          <p class="text-lg font-semibold">Full Stack Developer</p>
+
+          <div class="flex flex-wrap gap-2">
+            <span class="badge badge-outline">Dhaka</span>
+            <span class="badge badge-primary badge-outline">Full-time</span>
+          </div>
+
+          <p class="font-semibold text-success">৳45,000 - ৳75,000</p>
+
+          <p class="text-sm text-base-content/70">
+            Build full stack applications using React, Node.js and MongoDB.
+          </p>
+
+          <div class="card-actions mt-4">
+            <button class="btn max-w-[80px] btn-success btn-outline flex-1 interview-btn">Interview</button>
+            <button class="btn max-w-[80px] btn-error btn-outline flex-1 rejected-btn">Rejected</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job 6 -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Enosis Solutions</h2>
+          <p class="text-lg font-semibold">JavaScript Developer</p>
+
+          <div class="flex flex-wrap gap-2">
+            <span class="badge badge-outline">Dhaka</span>
+            <span class="badge badge-primary badge-outline">Hybrid</span>
+          </div>
+
+          <p class="font-semibold text-success">৳40,000 - ৳60,000</p>
+
+          <p class="text-sm text-base-content/70">
+            Create interactive web applications and reusable components.
+          </p>
+
+          <div class="card-actions mt-4">
+            <button class="btn max-w-[80px] btn-success btn-outline flex-1 interview-btn">Interview</button>
+            <button class="btn max-w-[80px] btn-error btn-outline flex-1 rejected-btn">Rejected</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job 7 -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Southtech Group</h2>
+          <p class="text-lg font-semibold">Oracle Developer</p>
+
+          <div class="flex flex-wrap gap-2">
+            <span class="badge badge-outline">Dhaka</span>
+            <span class="badge badge-primary badge-outline">Full-time</span>
+          </div>
+
+          <p class="font-semibold text-success">৳50,000 - ৳80,000</p>
+
+          <p class="text-sm text-base-content/70">
+            Develop enterprise applications using Oracle Database and PL/SQL.
+          </p>
+
+          <div class="card-actions mt-4">
+            <button class="btn max-w-[80px] btn-success btn-outline flex-1 interview-btn">Interview</button>
+            <button class="btn max-w-[80px] btn-error btn-outline flex-1 rejected-btn">Rejected</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job 8 -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Kaz Software</h2>
+          <p class="text-lg font-semibold">MERN Stack Developer</p>
+
+          <div class="flex flex-wrap gap-2">
+            <span class="badge badge-outline">Dhaka</span>
+            <span class="badge badge-primary badge-outline">Remote</span>
+          </div>
+
+          <p class="font-semibold text-success">৳45,000 - ৳70,000</p>
+
+          <p class="text-sm text-base-content/70">
+            Develop modern web applications using MongoDB, Express, React and Node.js.
+          </p>
+
+          <div class="card-actions mt-4">
+            <button class="btn max-w-[80px] btn-success btn-outline flex-1 interview-btn">Interview</button>
+            <button class="btn max-w-[80px] btn-error btn-outline flex-1 rejected-btn">Rejected</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- job file link -->
+     <script src="scripts/job.js"></script>
+  </body>
+</html>
