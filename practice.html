@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Application Tracker</title>
+  <!-- for theme daisy ui -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+  <!-- for daisy ui -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <!-- for tailwind -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+    integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- fav icon -->
+  <link rel="shortcut icon" href="js.png" type="image/x-icon" />
+  <style type="text/tailwindcss">
+    @theme {
+        --color-clifford: #da373d;
+      }
+    </style>
+</head>
+
+<body>
+
+  <div class="w-10/12 mx-auto pt-5 text-3xl text-secondary font-semibold">
+    <h2>Job Application Tracker</h2>
+  </div>
+  <!-- Status Cards -->
+  <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 w-10/12 mx-auto py-10">
+    <div class="stat bg-base-100 rounded-box shadow border border-secondary">
+      <div class="stat-title text-2xl text-primary font-bold">Total Jobs</div>
+      <div class="stat-value text-primary" id="total-count">8</div>
+    </div>
+
+    <div class="stat bg-base-100 rounded-box shadow border border-secondary">
+      <div class="stat-title text-2xl text-accent font-bold">Interview</div>
+      <div class="stat-value text-success" id="interview-count">0</div>
+    </div>
+
+    <div class="stat bg-base-100 rounded-box shadow border border-secondary">
+      <div class="stat-title text-2xl text-error font-bold">Rejected</div>
+      <div class="stat-value text-error" id="rejected-count">0</div>
+    </div>
+
+  </section>
+
+  <!-- Job List Header -->
+  <section class="flex justify-between items-center mb-5 w-10/12 mx-auto">
+    <h2 class="text-xl font-bold">Available Jobs</h2>
+    <span class="badge badge-primary" id="job-count">8 Jobs</span>
+  </section>
+
+  <!-- Tab buttons -->
+  <section class="flex gap-3 w-10/12 mx-auto mb-5">
+    <button id="all" class="btn btn-primary">All</button>
+    <button id="interview" class="btn btn-accent">Interview</button>
+    <button id="rejected" class="btn btn-error">Rejected</button>
+  </section>
+
+  <!-- Job Cards -->
+  <section class=" w-10/12 mx-auto">
+    <div id="job-container" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+
+  </section>
+  <!-- job file link -->
+  <script src="scripts/practice.js"></script>
+</body>
+
+</html>

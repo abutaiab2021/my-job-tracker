@@ -1,4 +1,4 @@
-console.log("Job Tracker Connected");
+// console.log("Job Tracker Connected");
 
 // ========================================
 // Step 1: Job Data
@@ -137,10 +137,13 @@ function renderJobs() {
   const total = jobs.length;
 
   const allJobs = jobs.filter((job) => job.status === "all").length;
+  // console.log(allJobs);
 
   const interview = jobs.filter((job) => job.status === "interview").length;
+  // console.log(interview)
 
   const rejected = jobs.filter((job) => job.status === "rejected").length;
+  // console.log(rejected)
 
   totalCount.innerText = total;
   interviewCount.innerText = interview;
@@ -242,9 +245,7 @@ function renderJobs() {
       data-action="delete"
       data-id="${job.id}"
       title="Delete Job">
-
       <i class="fa-solid fa-trash-can text-lg"></i>
-
     </button>
 
     <!-- Job Information -->
@@ -316,21 +317,18 @@ function renderJobs() {
 // All Tab
 allTab.addEventListener("click", function () {
   currentTab = "all";
-
   renderJobs();
 });
 
 // Interview Tab
 interviewTab.addEventListener("click", function () {
   currentTab = "interview";
-
   renderJobs();
 });
 
 // Rejected Tab
 rejectedTab.addEventListener("click", function () {
   currentTab = "rejected";
-
   renderJobs();
 });
 
